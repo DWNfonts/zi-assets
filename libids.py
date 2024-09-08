@@ -16,7 +16,7 @@ def 分离字符串(字符串):
             粗拆[-1] += 字
         elif 字符串[天 - 1] == "}" and 字 in "⿾⿿⿰⿱⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿲⿳":
             粗拆[-1] += 字
-        elif 字 != "" and 字 in "0123456789.BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz()[],":
+        elif 字 != "" and 字 in "0123456789.BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz()[],-_":
             粗拆[-1] += 字
         else:
             粗拆.append(字)
