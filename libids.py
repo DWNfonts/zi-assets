@@ -20,7 +20,6 @@ def 分离字符串(字符串):
             粗拆[-1] += 字
         else:
             粗拆.append(字)
-    print(粗拆)
 
     IDC = ["⿾⿿", "⿰⿱⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽", "⿲⿳"]
     甲 = 1
@@ -57,19 +56,24 @@ def 拆IDS(IDS):
     for 天 in range(len(IDS)):
         字 = IDS[天]
         甲 += 字
-        if 字 == "}" and not IDC部分处理完了吗:
-            结果["花括号"] = 甲
-            甲 = ""
-        elif 字 in "⿾⿿⿰⿱⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿲⿳" and not IDC部分处理完了吗:
-            结果["IDC"] = 甲
-            甲 = ""
+        if 字 in "⿾⿿⿰⿱⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿲⿳" and not IDC部分处理完了吗:
+            结果["拼合方式"] = 甲
             if IDS[天 + 1] != "[":
+                甲 = ""
                 IDC部分处理完了吗 = True
         elif 字 == "]" and not IDC部分处理完了吗:
             结果["方括号"] = 甲
             甲 = ""
             IDC部分处理完了吗 = True
         elif 天 + 1 == len(IDS):
-            print(结果)
             结果["部件"] = 分离字符串(甲)
     return 结果
+
+
+def 狂拆IDS(IDS):
+    拆了的IDS = 拆IDS(IDS)
+    for 天 in range(len(拆了的IDS["部件"])):
+        部件 = 拆了的IDS["部件"][天]
+        if set(部件) & set("⿾⿿⿰⿱⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿲⿳"):  # 部件可拆
+            拆了的IDS["部件"][天] = 狂拆IDS(部件)
+    return 拆了的IDS
