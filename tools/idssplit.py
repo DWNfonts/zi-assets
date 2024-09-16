@@ -9,8 +9,8 @@ import sys, re, json
 if __name__ != "__main__":
     raise Exception("__name__ 不等于 __main__。不要导入该脚本。")
 
-IDC正则 = '(\\{[^ ].*?\\})?[\\u2ff0-\\u2fff](\\[[^ ].*?\\])?|^\\{[^ ].*?\\}'
-汉字正则 = '#\\([^ ].*?\\)|[^ ][.0123456789BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz]*'
+IDC正则 = "(\\{[^ ].*?\\})?[\\u2ff0-\\u2fff](\\[[^ ].*?\\])?|^\\{[^ ].*?\\}"
+汉字正则 = "#\\([^ ].*?\\)|[^ ][.0123456789BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz]*"
 
 输出 = {}
 数据 = sys.stdin.read()
@@ -35,8 +35,8 @@ for 行 in 数据.splitlines():
                 剩部件序列 = re.sub(IDC正则, "", 序列)
                 部件列表 = set(re.findall(汉字正则, 剩部件序列))
                 try:
-                    输出[汉字 + 地区] = 输出[汉字].union(部件列表)
-                except:
+                    输出[汉字 + 地区] = 输出[汉字 + 地区].union(部件列表)
+                except Exception:
                     输出[汉字 + 地区] = 部件列表
 
 for 项 in list(输出):
