@@ -7,7 +7,7 @@
 import sys, re, json
 
 if __name__ != "__main__":
-    raise Exception("__name__ = __main__ only")
+    raise Exception("__name__ 不等于 __main__。不要导入该脚本。")
 
 IDC正则 = '(\\{[^ ].*?\\})?[\\u2ff0-\\u2fff](\\[[^ ].*?\\])?|^\\{[^ ].*?\\}'
 汉字正则 = '#\\([^ ].*?\\)|[^ ][.0123456789BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz]*'
@@ -42,4 +42,4 @@ for 行 in 数据.splitlines():
 for 项 in list(输出):
     输出[项] = list(输出[项])
 
-print(json.dumps(输出))
+print(json.dumps(输出, sort_keys=True, indent=4))
