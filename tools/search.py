@@ -29,13 +29,18 @@ def 搜索(部件表, 字, 狂搜等级=0, 调试=False):
                 print(
                     "部件 %s，正在进行第 %d 次遍历……" % (部件, 天 + 1), file=sys.stderr
                 )
-            for 项 in 结果[部件]:
-                for 字头 in 字头表:
-                    if 项 in 部件表[字头]:
-                        try:
-                            结果[部件] += [字头]
-                        except Exception:
-                            结果[部件] = [字头]
+            try:
+                for 项 in 结果[部件]:
+                    for 字头 in 字头表:
+                        if 项 in 部件表[字头]:
+                            try:
+                                结果[部件] += [字头]
+                            except Exception:
+                                结果[部件] = [字头]
+            except:
+                print(
+                    "该 JSON 没有 %s 部件。是子集化的 IDS 吗？" % 部件, file=sys.stderr
+                )
     return 结果
 
 
