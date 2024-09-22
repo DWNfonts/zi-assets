@@ -12,7 +12,7 @@ if __name__ != "__main__":
 IDC正则 = "(\\{[^ ].*?\\})?[\\u2ff0-\\u2fff](\\[[^ ].*?\\])?|^\\{[^ ].*?\\}"
 汉字正则 = "#\\([^ ].*?\\)|[^ ][.0123456789BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz]*"
 
-输出 = {}
+输出 = {"版本": 2, "拆": {}, "拼": {}}
 数据 = sys.stdin.read()
 for 行 in 数据.splitlines():
     汉字 = 行.split("\t")[0]
@@ -35,11 +35,16 @@ for 行 in 数据.splitlines():
                 剩部件序列 = re.sub(IDC正则, "", 序列)
                 部件列表 = set(re.findall(汉字正则, 剩部件序列))
                 try:
-                    输出[汉字 + 地区] = 输出[汉字 + 地区].union(部件列表)
+                    输出["拆"][汉字 + 地区] = 输出["拆"][汉字 + 地区].union(部件列表)
                 except Exception:
-                    输出[汉字 + 地区] = 部件列表
+                    输出["拆"][汉字 + 地区] = 部件列表
 
-for 项 in list(输出):
-    输出[项] = list(输出[项])
+for 拆项 in list(输出["拆"]):
+    for 拼项 in 输出["拆"][拆项]:
+        try:
+            输出["拼"][拼项] += [拆项]
+        except Exception:
+            输出["拼"][拼项] = [拆项]
+    输出["拆"][拆项] = list(输出["拆"][拆项])
 
 print(json.dumps(输出, sort_keys=True, indent=4))
