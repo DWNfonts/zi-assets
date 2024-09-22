@@ -19,15 +19,11 @@ tools/idssplit.py < ids/ids_lv2.txt > data/lv2.json
 ```
 
 ```
-$ tools/search.py data/lv0.json 字
-字 -> 㝋J 字J 㝋. 字. 一. (5)
-㝋J : 字J 𡧖J (2)
-字J : 牸J 茡J 𡦂V 𡦙J 𡨸V 𣉬J 𣑑J 𥊐J 𦍺J 𧧕J 𪜸J 𪧚 𪰿 𫇊 𫡉 𫳘 𫿰 𭇬 𭸇 𮋩 𮪃 𱚂 𲂯 (23)
-㝋. : 字. (1)
-字. : 牸. 茡. 茡H 𡦂Q 𡦙. 𡧖T 𡨸Q 𡶻 𣉬. 𣑑T 𥊐. 𦍺. 𧧕. 𪜸. 𫃣 𫒛 𬇤 𭓆 𭓖 𭓙 (20)
-一. : ⺊ ⺕ ⺝ ユ. 㐀 㐄J 㐆y 㒊J 㒨J 㒫 [实际上这汉字太多了，VSCode 都出 bug 了] (2886)
-
-$ tools/search.py data/lv0.json 字 1 # 狂搜版（多次遍历已搜汉字，性能会大打折扣，谨慎选择）
+$ # 使用方法：python tools/search.py [命令] [字] [选项] < [JSON 文件]
+$ # 命令：「反」=「单字反差」；「搜」=「部件检索」（未实现）
+$ # 选项：-遍x：遍历 x 遍；-线y：进程增加（也未实现）
+$ tools/search.py 反 口 < data/lv0.json
+$ tools/search.py 反 口 1 < data/lv0.json
 ```
 
 **请友善讨论，不要[评头论足]。对一些方面的请求（如不使用中文关键字）拒绝。**

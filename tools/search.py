@@ -12,21 +12,45 @@
 import sys, json
 
 
-def 反查(输入字典, 输入汉字, 遍历次数, 线程数):
+def 反查(输入字典, 输入汉字, 遍历次数=0, 调试=False):
     输出 = {"欲拼部件组": [], "部件": {}}
-    欲拼部件组 = 输入字典["拆"][输入汉字]
+    欲拼部件组 = []
+    for 项 in 输入字典["拆"]:
+        if 项.startswith(输入汉字):
+            欲拼部件组 += 输入字典["拆"][项]
     输出["欲拼部件组"] = 欲拼部件组
     for 欲拼部件 in 欲拼部件组:
         输出["部件"][欲拼部件] = 输入字典["拼"][欲拼部件]
+    for 遍历号 in range(遍历次数):
+        if 调试:
+            print("进行第 %d 次遍历" % 遍历号, file=sys.stderr)
+        for 项 in list(输出["部件"]):
+            输出列表 = 输出["部件"][项]
+            for 子部件 in 输出["部件"][项]:
+                try:
+                    输出列表 += 输入字典["拼"][子部件]
+                except Exception:
+                    if 调试:
+                        print("%s 字不可搜。" % 子部件, file=sys.stderr)
+            输出列表 = list(set(输出列表))
+            输出列表.sort()
+            输出["部件"][项] = 输出列表
+
     return 输出
+
 
 def 美化(反查字典):
     return str(反查字典)
+
 
 if __name__ == "__main__":
     输入 = json.load(sys.stdin)
     match sys.argv[1]:
         case "反" | "单字反查":
-            print(str(反查(输入,sys.argv[2],0,0)))
+            try:
+                遍历次数 = int(sys.argv[3])
+            except Exception:
+                遍历次数 = 0
+            print(str(反查(输入, sys.argv[2], 遍历次数, 调试=True)))
         case _:
             raise Exception("非法语句。")
