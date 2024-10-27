@@ -20,8 +20,8 @@ tools/idssplit.py < ids/ids_lv2.txt > data/lv2.json
 
 ```
 $ # 使用方法：python tools/search.py [命令] [字] [选项] < [JSON 文件]
-$ # 命令：「反」=「单字反差」；「搜」=「部件检索」（未实现）
-$ # 选项：-遍x：遍历 x 遍；-线y：进程增加（也未实现）
+$ # 命令：「反」=「单字反差」；「搜」=「部件检索」
+$ # 选项：目前只是「遍历次数」
 $ tools/search.py 反 口 < data/lv0.json
 $ tools/search.py 反 口 1 < data/lv0.json
 ```
