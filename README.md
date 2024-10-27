@@ -8,6 +8,8 @@
 
 ## 用法
 
+（看看 <https://asciinema.org/a/GORi04gFK4XoaSyv8xOByh7zD>？）
+
 ```bash
 # 准备
 git clone https://github.com/DWNfonts/zi-assets.git
