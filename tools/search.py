@@ -47,6 +47,7 @@ def 部件检索(输入字典, 输入汉字, 遍历次数=0, 调试=False):
     输出 = []
     汉字正则 = "#\\([^ ].*?\\)|[^ ][.0123456789BGHJKMPQSTUVabcdefghjlmnpqrstuvwxyz]*"
     输入部件 = re.findall(汉字正则, 输入汉字)
+    
     for 汉字 in list(输入字典["拆"]):
         部件 = 输入字典["拆"][汉字]
         for 遍历号 in range(遍历次数):
@@ -59,7 +60,7 @@ def 部件检索(输入字典, 输入汉字, 遍历次数=0, 调试=False):
                     except Exception:
                         break
         if set(输入部件).issubset(set(部件)):
-            输出 += 汉字
+            输出 += [汉字]
     return 输出
 
 
